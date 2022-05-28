@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1>Edit Beverage{{title}}</h1>
+
+            <hr>
+
+            <form action="/beverage/{{_id}}/edit" method="POST">
+
+                <div class="mb-3">
+                    <label for="title" class="form-label">Name</label>
+                    <input required type="text" class="form-control" id="title" name="name" value="{{name}}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="class" class="form-label">Class</label>
+                    <input type="text" class="form-control" id="class" name="class" value="{{class}}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="expirationdate" class="form-label"> Expiration Date</label>
+                    <input type="text" class="form-control" id="expirationdate" name="expirationdate" value="{{expirationdate}}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="size" class="form-label">Size</label>
+                    <input type="text" class="form-control" id="size" name="size" value="{{size}}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="buyingprice" class="form-label">Buying Price</label>
+                    <input type="text" class="form-control" id="buyingprice" name="buyingprice" value="{{buyingprice}}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="sellingprice" class="form-label">Selling Price</label>
+                    <input type="text" class="form-control" id="sellingprice" name="sellingprice" value="{{sellingprice}}">
+                </div>
+
+                <button type="submit" class="btn btn-dark">Edit Beverage</button>
+                <a href="/" class="btn btn-dark">Go back</a>
+            </form>
+            <hr>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>beverages list</h1>
+  <section id="beverage-container">
+    {{#each beverage}}
+    <div class="book-row">
+      <a href="/beverages/{{this._id}}">{{this.title}}</a>
+      <div class="action-links">
+        {{#if ../isLoggedIn}}
+        <a href="/beverages/{{this._id}}/edit" class="btn btn-dark">Edit</a>
+        {{/if}}
+        <button type="submit" class="btn btn-warning delete-button">Delete <span class="hide">{{this._id}}</span></button>
+      </div>
+    </div>
+    {{/each}}
+  </section>
+
+  <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/js/beverages.js"></script>
