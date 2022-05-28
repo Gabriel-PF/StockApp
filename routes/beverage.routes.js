@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const beverage = require('../models/Beverage.model');
 const Beverage = require('../models/Beverage.model');
 
 router.get('/', async (req, res, next) => {
