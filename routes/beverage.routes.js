@@ -81,7 +81,7 @@ router.post('/:id/delete', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
-    const book = await Beverage.findById(id);
+    const beverage = await Beverage.findById(id);
     res.render( 'beverages/beverage-details', beverage);
   } catch (error) {
     next(error);
