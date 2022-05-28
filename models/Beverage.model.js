@@ -11,24 +11,24 @@ const beverageSchema = new Schema({
     pictureUrl: String
   },
 
-  Expiration: {
+  expiration: {
     type: Number,
     
   },
 
-  Size : {
+  size : {
     type: Number,
     min: 300,
     max: 3000
   },
 
-  BuyingPrice : {
+  buyingPrice : {
     type: Number,
     min: 0,
     max: 1000
   },
 
-  SellingPrice : {
+  sellingPrice : {
     type: Number,
     min: 0,
     max: 2000

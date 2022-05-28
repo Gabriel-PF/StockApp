@@ -15,12 +15,7 @@ const userSchema = new Schema({
       type: String, 
     },
     isAdmin: Boolean, 
-    following: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'user'
-      },
-    ],
+    
     role: {
       type: String, 
       enum: ['USER', 'ADMIN'],
