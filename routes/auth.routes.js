@@ -1,7 +1,7 @@
-/* const bcrypt = require("bcryptjs"); */
+const bcrypt = require("bcryptjs"); 
 const User = require("../models/User.model");
 /* const updloader = require('../config/cloudinary.config'); */
-const SALT_FACTOR = 12;
+const SALT_FACTOR = 10;
 
 const router = require("express").Router();
 
@@ -10,34 +10,33 @@ router.get('/signup', (req, res, next) => {
 })
 
 router.post('/signup', async (req, res, next) => {
-  const { email, password } = req.body;
+  const { name, password } = req.body;
   console.log(req.file);
 
-  if(!email || !password){
+  if(!name || !password){
     return res.render('auth/signup', {
       errorMessage: "Credentials are mondatory!"
     })
   }
 
-  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+/*   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
   if(!regex.test(password)){
     return res.render('auth/signup', {
       errorMessage: "Password needs to have 8 char, including lower/upper case and a digit"
     })
-  }
+  } */
 
   try {
-    const foundUser = await User.findOne({ email });
+    const foundUser = await User.findOne({ name });
 
     if(foundUser){
       return res.render('auth/signup', {
-        errorMessage: "Email already in use"
+        errorMessage: "Name already in use"
       })
     }
 
     const hashedPassword = bcrypt.hashSync(password, SALT_FACTOR);
     await User.create({
-      email, 
       password: hashedPassword,
       profilePic: req.file.path
     })
@@ -54,9 +53,9 @@ router.get('/login', (req, res, next) => {
 })
 
 router.post("/login", async (req, res, next) => {
-  const { email, password } = req.body;
+  const { name, password } = req.body;
 
-  if(!email || !password){
+  if(!name || !password){
     return res.render('auth/login', {
       errorMessage: "Credentials are mondatory!"
     })
@@ -70,7 +69,7 @@ router.post("/login", async (req, res, next) => {
   }
 
   try {
-    const foundUser = await User.findOne({ email });
+    const foundUser = await User.findOne({ name });
 
     if(!foundUser){
       return res.render('auth/login', {
