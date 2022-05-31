@@ -10,7 +10,6 @@ const email = 'admin@admin.com'
 
 const newAdmin = {
     name: boss,
-    email,
     password: securePass,
     isAdmin: true, 
     following: [],

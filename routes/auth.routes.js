@@ -5,7 +5,12 @@ const User = require("../models/User.model");
 const SALT_FACTOR = 10;
 
 
-router.get('/signup', (req, res, next) => {
+router.get('/login', (req, res, next) => {
+  res.render('auth/login');
+})
+
+
+  router.get('/signup', (req, res, next) => {
   res.render('auth/signup');
 })
 
@@ -14,18 +19,18 @@ router.post('/login', async (req, res, next) => {
   const { username, password } = req.body;
 
   if(!username || !password){
-    return res.render('auth/login', {
-      errorMessage: "Credentials are mondatory!"
+    return res.render('auth/signup', {
+      errorMessage: "Create an Acc!"
     })
-  }
+  } 
 
-/*   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
   if(!regex.test(password)){
     return res.render('auth/signup', {
       errorMessage: "Password needs to have 8 char, including lower/upper case and a digit"
     })
-  } */ 
-
+  } 
+ 
   try {
     const foundUser = await User.findOne({ username });
 
@@ -60,14 +65,14 @@ router.post("/login", async (req, res, next) => {
     })
   }
 
-/*   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
   if(!regex.test(password)){
     return res.render('auth/login', {
       errorMessage: "Password needs to have 8 char, including lower/upper case and a digit"
     })
-  } */
+  } 
 
-  try {
+   try {
     const foundUser = await User.findOne({ username });
 
     if(!foundUser){
@@ -91,6 +96,6 @@ router.post("/login", async (req, res, next) => {
   } catch (error) {
     
   }
-})
+}) 
 
 module.exports = router;
