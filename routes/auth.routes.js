@@ -10,12 +10,12 @@ router.get('/login', (req, res, next) => {
 })
 
 
-  router.get('/signup', (req, res, next) => {
+router.get('/signup', (req, res, next) => {
   res.render('auth/signup');
 })
 
 
-router.post('/login', async (req, res, next) => {
+router.post('/signup', async (req, res, next) => {
   const { username, password } = req.body;
 
   if(!username || !password){
@@ -24,12 +24,12 @@ router.post('/login', async (req, res, next) => {
     })
   } 
 
-   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
   if(!regex.test(password)){
     return res.render('auth/signup', {
       errorMessage: "Password needs to have 8 char, including lower/upper case and a digit"
     })
-  } 
+  }  
  
   try {
     const foundUser = await User.findOne({ username });
@@ -42,6 +42,7 @@ router.post('/login', async (req, res, next) => {
 
     const hashedPassword = bcrypt.hashSync(password, SALT_FACTOR);
     await User.create({
+      username,
       password: hashedPassword
     })
 
@@ -52,50 +53,51 @@ router.post('/login', async (req, res, next) => {
   }
 })
 // login
-router.get('/login', (req, res, next) => {
-  res.render('auth/login');
-})
 
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
 
-  if(!username || !password){
-    return res.render('auth/login', {
-      errorMessage: "Credentials are mondatory!"
+  if(username || password){
+    return res.render('beverage/beverages-list', {
+      errorMessage: "beverages-list"
     })
   }
 
-   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+
+  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
   if(!regex.test(password)){
     return res.render('auth/login', {
       errorMessage: "Password needs to have 8 char, including lower/upper case and a digit"
     })
   } 
-
-   try {
+ 
+ try {
     const foundUser = await User.findOne({ username });
 
     if(!foundUser){
       return res.render('auth/login', {
         errorMessage: "Wrong credentials"
       })
-    }
+    } 
 
-    const checkPassword = bcrypt.compareSync(password, foundUser.password);
+     const checkPassword = bcrypt.compareSync(password, foundUser.password);
     if(!checkPassword){
       return res.render('auth/login', {
         errorMessage: "Wrong credentials"
       })
+    } else {
+      const objectUser = foundUser.toObject();
+      delete objectUser.password;
+      req.session.currentUser = objectUser;
+  
+      return res.redirect('/');
     }
 
-    const objectUser = foundUser.toObject();
-    delete objectUser.password;
-    req.session.currentUser = objectUser;
-
-    return res.redirect('/');
+    
   } catch (error) {
     
   }
-}) 
+})  
+
 
 module.exports = router;
