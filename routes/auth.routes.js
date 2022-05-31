@@ -9,12 +9,12 @@ router.get('/signup', (req, res, next) => {
   res.render('auth/signup');
 })
 
-router.post('/signup', async (req, res, next) => {
-  const { name, password } = req.body;
-  console.log(req.file);
 
-  if(!name || !password){
-    return res.render('auth/signup', {
+router.post('/login', async (req, res, next) => {
+  const { username, password } = req.body;
+
+  if(!username || !password){
+    return res.render('auth/login', {
       errorMessage: "Credentials are mondatory!"
     })
   }
@@ -24,10 +24,10 @@ router.post('/signup', async (req, res, next) => {
     return res.render('auth/signup', {
       errorMessage: "Password needs to have 8 char, including lower/upper case and a digit"
     })
-  } */
+  } */ 
 
   try {
-    const foundUser = await User.findOne({ name });
+    const foundUser = await User.findOne({ username });
 
     if(foundUser){
       return res.render('auth/signup', {
@@ -37,8 +37,7 @@ router.post('/signup', async (req, res, next) => {
 
     const hashedPassword = bcrypt.hashSync(password, SALT_FACTOR);
     await User.create({
-      password: hashedPassword,
-      profilePic: req.file.path
+      password: hashedPassword
     })
 
     res.redirect('/auth/login');
@@ -47,29 +46,29 @@ router.post('/signup', async (req, res, next) => {
     next(error);
   }
 })
-
+// login
 router.get('/login', (req, res, next) => {
   res.render('auth/login');
 })
 
 router.post("/login", async (req, res, next) => {
-  const { name, password } = req.body;
+  const { username, password } = req.body;
 
-  if(!name || !password){
+  if(!username || !password){
     return res.render('auth/login', {
       errorMessage: "Credentials are mondatory!"
     })
   }
 
-  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+/*   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
   if(!regex.test(password)){
     return res.render('auth/login', {
       errorMessage: "Password needs to have 8 char, including lower/upper case and a digit"
     })
-  }
+  } */
 
   try {
-    const foundUser = await User.findOne({ name });
+    const foundUser = await User.findOne({ username });
 
     if(!foundUser){
       return res.render('auth/login', {
