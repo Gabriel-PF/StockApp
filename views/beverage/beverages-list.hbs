@@ -2,7 +2,7 @@
   <h1>beverages list</h1>
   <section id="beverage-container">
     {{#each beverage}}
-    <div class="book-row">
+    <div class="beverage-row">
       <a href="/beverages/{{this._id}}">{{this.title}}</a>
       <div class="action-links">
         {{#if ../isLoggedIn}}
