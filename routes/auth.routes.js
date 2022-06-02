@@ -16,9 +16,9 @@ const SALT_FACTOR = 10;
 
 
 router.post('/', async (req, res, next) => {
-  const { Signupusername, Signuppassword } = req.body;
+  const { username, password } = req.body;
 
-  if(!Signupusername || !Signuppassword){
+  if(!username || !password){
     return res.render('/', {
       errorMessage: "Create an Acc!"
     })
@@ -32,7 +32,7 @@ router.post('/', async (req, res, next) => {
   }  
  
   try {
-    const foundUser = await User.findOne({ Signupusername });
+    const foundUser = await User.findOne({ username });
 
     if(foundUser){
       return res.render('/', {
@@ -40,10 +40,10 @@ router.post('/', async (req, res, next) => {
       })
     }
 
-    const hashedPassword = bcrypt.hashSync(Signuppassword, SALT_FACTOR);
+    const hashedPassword = bcrypt.hashSync(password, SALT_FACTOR);
     await User.create({
-      Signupusername,
-      Signuppassword: hashedPassword
+      username,
+      password: hashedPassword
     })
 
     res.redirect('/');
@@ -55,9 +55,9 @@ router.post('/', async (req, res, next) => {
 // login
 
 router.post("/", async (req, res, next) => {
-  const { Loginusername, Loginpassword } = req.body;
+  const { username, password } = req.body;
 
-  if(Loginusername || Loginpassword){
+  if(username || password){
     return res.render('beverage/beverages-list', {
       errorMessage: "beverages-list"
     })
@@ -72,7 +72,7 @@ router.post("/", async (req, res, next) => {
   } 
  
  try {
-    const foundUser = await User.findOne({ Loginusername });
+    const foundUser = await User.findOne({ username });
 
     if(!foundUser){
       return res.render('/', {
@@ -80,14 +80,14 @@ router.post("/", async (req, res, next) => {
       })
     } 
 
-     const checkPassword = bcrypt.compareSync(Loginpassword, foundUser.Loginpassword);
+     const checkPassword = bcrypt.compareSync(password, foundUser.password);
     if(!checkPassword){
       return res.render('/', {
         errorMessage: "Wrong credentials"
       })
     } else {
       const objectUser = foundUser.toObject();
-      delete objectUser.Loginpassword;
+      delete objectUser.password;
       req.session.currentUser = objectUser;
   
       return res.redirect('beverage/beverages-list');
