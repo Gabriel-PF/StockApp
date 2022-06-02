@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const password = 'admin'; 
 const securePass = bcrypt.hashSync(password);
 const boss = 'admin'
-const email = 'admin@admin.com'
+
 
 const newAdmin = {
     name: boss,
