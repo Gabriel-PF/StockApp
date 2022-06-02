@@ -2,18 +2,16 @@ const { Schema, model } = require('mongoose');
 
 const beverageSchema = new Schema({
   name: {
-    brand: String,
+    type: String,
     /* required: true */
   },
 
   type: {
-    class: String,
-    pictureUrl: String
+    type: String,
   },
 
   expiration: {
-    type: Number,
-    
+    type: String,   
   },
 
   size : {

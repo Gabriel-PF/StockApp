@@ -16,8 +16,9 @@ router.get('/create', (req, res, next) => {
 })
 
 // list
-router.get('/list', (req, res, next) => {
-  res.render('beverage/beverages-list');
+router.get('/list', async (req, res, next) => {
+  const beverages = await Beverage.find();
+  res.render( 'beverage/beverages-list', { beverages });
 })
 
 
