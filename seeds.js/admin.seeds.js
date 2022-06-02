@@ -9,7 +9,7 @@ const boss = 'admin'
 
 
 const newAdmin = {
-    name: boss,
+    username: boss,
     password: securePass,
     isAdmin: true, 
     following: [],

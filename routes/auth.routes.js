@@ -64,12 +64,12 @@ router.post("/", async (req, res, next) => {
   }
 
 
-  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+  /* const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
   if(!regex.test(password)){
     return res.render('/', {
       errorMessage: "Password needs to have 8 char, including lower/upper case and a digit"
     })
-  } 
+  }  */
  
  try {
     const foundUser = await User.findOne({ username });
@@ -90,7 +90,7 @@ router.post("/", async (req, res, next) => {
       delete objectUser.password;
       req.session.currentUser = objectUser;
   
-      return res.redirect('beverage/beverages-list');
+      return res.redirect('beverage/create');
     }
 
     
