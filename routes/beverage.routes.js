@@ -1,5 +1,4 @@
 const router = require('express').Router();
-/* const beverage = require('../models/Beverage.model'); */
 const Beverage = require('../models/Beverage.model');
 
 router.get('/', async (req, res, next) => {
@@ -11,10 +10,16 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-
+//  create
 router.get('/create', (req, res, next) => {
   res.render('beverage/beverages-create');
 })
+
+// list
+router.get('/list', (req, res, next) => {
+  res.render('beverage/beverages-list');
+})
+
 
 router.post('/create', async (req, res, next) => {
   try {
@@ -28,7 +33,7 @@ router.post('/create', async (req, res, next) => {
       sellingPrice
     });
 
-    res.redirect(' /Beverages');
+    res.redirect('/beverage/list');
   } catch (error) {
     next(error);
   }

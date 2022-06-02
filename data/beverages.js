@@ -1,22 +1,24 @@
-const beverage = [
+const beverages = [
 
     {
     name: "Grey Goose",
     type: "Vodka",
-    Expiration: 0,
-    Size : 700,
-    BuyingPrice : 20,
-    SellingPrice : 30
+    expiration: 0,
+    size : 700,
+    bubuyingPrice : 20,
+    sellingPrice : 30
     },
 
     {
     name: "Red Label",
     type: "whisky",
-    Expiration: 0,
-    Size : 700,
-    BuyingPrice : 10,
-    SellingPrice : 20
+    expiration: 0,
+    size : 700,
+    buyingPrice : 10,
+    sellingPrice : 20
     },
 
 
 ]
+
+module.exports = beverages;

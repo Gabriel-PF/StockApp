@@ -1,9 +1,13 @@
+
+
+<h1>aasd</h1>
+ 
 <div class="container">
   <h1>beverages list</h1>
   <section id="beverage-container">
     {{#each beverage}}
     <div class="beverage-row">
-      <a href="/beverages/{{this._id}}">{{this.title}}</a>
+      <a href="/beverages/{{this._id}}">{{this.name}}</a>
       <div class="action-links">
         {{#if ../isLoggedIn}}
         <a href="/beverages/{{this._id}}/edit" class="btn btn-dark">Edit</a>
@@ -17,7 +21,7 @@
   <canvas id="myChart"></canvas>
 </div>
 
-<a href="/beverage/create"> create </a>
+<a  href="/beverage/create"> create </a>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="/js/beverages.js"></script>
+{{!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
+<script src="/beverages.js"></script>
