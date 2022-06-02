@@ -5,48 +5,48 @@ const User = require("../models/User.model");
 const SALT_FACTOR = 10;
 
 
-router.get('/login', (req, res, next) => {
-  res.render('auth/login');
+/* router.get('/login', (req, res, next) => {
+  res.render('/');
 })
+ */
+//Sign up
+/* router.get('/signup', (req, res, next) => {
+  res.render('/');
+}) */
 
 
-router.get('/signup', (req, res, next) => {
-  res.render('auth/signup');
-})
+router.post('/', async (req, res, next) => {
+  const { Signupusername, Signuppassword } = req.body;
 
-
-router.post('/signup', async (req, res, next) => {
-  const { username, password } = req.body;
-
-  if(!username || !password){
-    return res.render('auth/signup', {
+  if(!Signupusername || !Signuppassword){
+    return res.render('/', {
       errorMessage: "Create an Acc!"
     })
   } 
 
     const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
   if(!regex.test(password)){
-    return res.render('auth/signup', {
+    return res.render('/', {
       errorMessage: "Password needs to have 8 char, including lower/upper case and a digit"
     })
   }  
  
   try {
-    const foundUser = await User.findOne({ username });
+    const foundUser = await User.findOne({ Signupusername });
 
     if(foundUser){
-      return res.render('auth/signup', {
+      return res.render('/', {
         errorMessage: "Name already in use"
       })
     }
 
-    const hashedPassword = bcrypt.hashSync(password, SALT_FACTOR);
+    const hashedPassword = bcrypt.hashSync(Signuppassword, SALT_FACTOR);
     await User.create({
-      username,
-      password: hashedPassword
+      Signupusername,
+      Signuppassword: hashedPassword
     })
 
-    res.redirect('/auth/login');
+    res.redirect('/');
 
   } catch (error) {
     next(error);
@@ -54,10 +54,10 @@ router.post('/signup', async (req, res, next) => {
 })
 // login
 
-router.post("/login", async (req, res, next) => {
-  const { username, password } = req.body;
+router.post("/", async (req, res, next) => {
+  const { Loginusername, Loginpassword } = req.body;
 
-  if(username || password){
+  if(Loginusername || Loginpassword){
     return res.render('beverage/beverages-list', {
       errorMessage: "beverages-list"
     })
@@ -66,31 +66,31 @@ router.post("/login", async (req, res, next) => {
 
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
   if(!regex.test(password)){
-    return res.render('auth/login', {
+    return res.render('/', {
       errorMessage: "Password needs to have 8 char, including lower/upper case and a digit"
     })
   } 
  
  try {
-    const foundUser = await User.findOne({ username });
+    const foundUser = await User.findOne({ Loginusername });
 
     if(!foundUser){
-      return res.render('auth/login', {
+      return res.render('/', {
         errorMessage: "Wrong credentials"
       })
     } 
 
-     const checkPassword = bcrypt.compareSync(password, foundUser.password);
+     const checkPassword = bcrypt.compareSync(Loginpassword, foundUser.Loginpassword);
     if(!checkPassword){
-      return res.render('auth/login', {
+      return res.render('/', {
         errorMessage: "Wrong credentials"
       })
     } else {
       const objectUser = foundUser.toObject();
-      delete objectUser.password;
+      delete objectUser.Loginpassword;
       req.session.currentUser = objectUser;
   
-      return res.redirect('/');
+      return res.redirect('beverage/beverages-list');
     }
 
     
