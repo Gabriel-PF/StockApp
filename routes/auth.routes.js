@@ -5,17 +5,14 @@ const User = require("../models/User.model");
 const SALT_FACTOR = 10;
 
 
-/* router.get('/login', (req, res, next) => {
-  res.render('/');
+router.get('/login', (req, res, next) => {
+  res.render('auth/login');
 })
- */
-//Sign up
-/* router.get('/signup', (req, res, next) => {
-  res.render('/');
-}) */
+router.get('/signup', (req, res, next) => {
+  res.render('auth/signup');
+})
 
-
-router.post('/', async (req, res, next) => {
+router.post('/signup', async (req, res, next) => {
   const { username, password } = req.body;
 
   if(!username || !password){
@@ -26,7 +23,7 @@ router.post('/', async (req, res, next) => {
 
     const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
   if(!regex.test(password)){
-    return res.render('/', {
+    return res.render('auth/signup', {
       errorMessage: "Password needs to have 8 char, including lower/upper case and a digit"
     })
   }  
@@ -35,7 +32,7 @@ router.post('/', async (req, res, next) => {
     const foundUser = await User.findOne({ username });
 
     if(foundUser){
-      return res.render('/', {
+      return res.render('auth/signup', {
         errorMessage: "Name already in use"
       })
     }
@@ -46,7 +43,7 @@ router.post('/', async (req, res, next) => {
       password: hashedPassword
     })
 
-    res.redirect('/');
+    res.redirect('/auth/login');
 
   } catch (error) {
     next(error);
@@ -54,7 +51,7 @@ router.post('/', async (req, res, next) => {
 })
 // login
 
-router.post("/", async (req, res, next) => {
+router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
 
   if(username || password){
@@ -64,25 +61,25 @@ router.post("/", async (req, res, next) => {
   }
 
 
-  /* const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
   if(!regex.test(password)){
     return res.render('/', {
       errorMessage: "Password needs to have 8 char, including lower/upper case and a digit"
     })
-  }  */
+  }  
  
  try {
     const foundUser = await User.findOne({ username });
 
     if(!foundUser){
-      return res.render('/', {
+      return res.render('auth/login', {
         errorMessage: "Wrong credentials"
       })
     } 
 
      const checkPassword = bcrypt.compareSync(password, foundUser.password);
     if(!checkPassword){
-      return res.render('/', {
+      return res.render('auth/login', {
         errorMessage: "Wrong credentials"
       })
     } else {
@@ -90,7 +87,7 @@ router.post("/", async (req, res, next) => {
       delete objectUser.password;
       req.session.currentUser = objectUser;
   
-      return res.redirect('beverage/create');
+      return res.redirect('/');
     }
 
     

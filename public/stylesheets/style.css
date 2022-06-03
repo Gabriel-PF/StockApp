@@ -1,4 +1,40 @@
-body{
+body {
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  }
+  
+  a {
+	color: #00b7ff;
+  }
+  
+  h1 {
+	color: 15px;
+  }
+  
+  .book-row {
+	display: flex;
+	padding: 10px;
+	gap: 8px;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid black;
+  }
+  
+  img {
+	width: 100%;
+  }
+  
+  .action-links {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+  }
+  
+  .hide {
+	display: none;
+  }
+
+
+/* body{
 	margin: 0;
 	padding: 0;
 	display: flex;
@@ -88,4 +124,4 @@ button:hover{
 }
 #chk:checked ~ .signup label{
 	transform: scale(.6);
-}
+} */
