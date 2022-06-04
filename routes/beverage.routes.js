@@ -1,24 +1,25 @@
 const router = require('express').Router();
+const { isAdmin, isLoggedIn } = require('../middlewares/auth.middlewares');
 const Beverage = require('../models/Beverage.model');
 
-router.get('/', async (req, res, next) => {
+router.get('/', isLoggedIn, async (req, res, next) => {
   try {
     const Beverages = await beverage.find();
-    res.render( 'beverage/beverages-list', { Beverages });
+    res.render( 'beverage/beverages-list', { Beverages, isAdmin: req.session.currentUser.isAdmin });
   } catch (error) {
     next(error);
   }
 })
 
 //  create
-router.get('/create', (req, res, next) => {
+router.get('/create', isAdmin,(req, res, next) => {
   res.render('beverage/beverages-create');
 })
 
 // list
-router.get('/list', async (req, res, next) => {
+router.get('/list', isLoggedIn, async (req, res, next) => {
   const beverages = await Beverage.find();
-  res.render( 'beverage/beverages-list', { beverages });
+  res.render( 'beverage/beverages-list', { beverages,  isAdmin: req.session.currentUser.isAdmin });
 })
 
 

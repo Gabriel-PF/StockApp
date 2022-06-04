@@ -10,7 +10,10 @@ const userSchema = new Schema({
     password: {
       type: String, 
     },
-    isAdmin: Boolean, 
+    isAdmin: {
+      type: Boolean,
+      default: false 
+    },
     
   });
 
