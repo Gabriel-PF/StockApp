@@ -5,19 +5,22 @@ const User = require("../models/User.model");
 const SALT_FACTOR = 10;
 
 
-router.get('/login', (req, res, next) => {
+ router.get('/login', (req, res, next) => {
   res.render('auth/login');
-})
-router.get('/signup', (req, res, next) => {
+}) 
+
+
+ router.get('/signup', (req, res, next) => {
   res.render('auth/signup');
-})
+}) 
 
 router.post('/signup', async (req, res, next) => {
   const { username, password } = req.body;
 
   if(!username || !password){
-    return res.render('/', {
-      errorMessage: "Create an Acc!"
+    return res.render('auth/signup', {
+      errorMessage: "Credentials are mondatory"
+      
     })
   } 
 
@@ -43,7 +46,7 @@ router.post('/signup', async (req, res, next) => {
       password: hashedPassword
     })
 
-    res.redirect('/auth/login');
+    res.redirect('auth/login');
 
   } catch (error) {
     next(error);
@@ -54,16 +57,17 @@ router.post('/signup', async (req, res, next) => {
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
 
-  if(username || password){
-    return res.render('beverage/beverages-list', {
-      errorMessage: "beverages-list"
+  if(!username || !password){
+     return res.render('auth/login', {
+      errorMessage: "Credentials are mondatory!"
     })
+   
   }
 
 
    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
   if(!regex.test(password)){
-    return res.render('/', {
+    return res.render('auth/login', {
       errorMessage: "Password needs to have 8 char, including lower/upper case and a digit"
     })
   }  
