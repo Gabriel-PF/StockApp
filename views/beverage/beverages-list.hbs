@@ -6,7 +6,13 @@
     <div class="beverage-row">
       <a href="/beverages/">{{this.name}}-{{type}}-{{expiration}}-{{size}}</a>
       <div class="action-links">
+
+       {{!--  criar a funcao para esse button  enviar a bebida para o bar --}}
+         <button type="submit" class="btn btn-warning delete-button">Send to the Bar <span class="hide"></span></button>
+
         {{#if ../isAdmin}}
+
+        {{!-- arrumar o link de adit --}}
         <a href="/beverages/edit" class="btn btn-dark">Edit</a>
          <button type="submit" class="btn btn-warning delete-button">Delete <span class="hide"></span></button>
         {{/if}}
@@ -19,5 +25,6 @@
 </div>
 
 <a  href="/beverage/create"> create </a>
+<a  href="/beverage/bar"> Bar </a>
 
 {{!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}

@@ -16,6 +16,11 @@ router.get('/create', isAdmin,(req, res, next) => {
   res.render('beverage/beverages-create');
 })
 
+//  Bar
+router.get('/bar', isLoggedIn,(req, res, next) => {
+  res.render('beverage/beverages-bar');
+})
+
 // list
 router.get('/list', isLoggedIn, async (req, res, next) => {
   const beverages = await Beverage.find();

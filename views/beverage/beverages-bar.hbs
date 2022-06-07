@@ -1,12 +1,12 @@
 <div class="container">
-  <h1>beverages list</h1>
+  <h1>Bar</h1>
   <section id="beverage-container">
     {{#each beverages}}
     <div class="beverage-row">
-      <a href="/beverages/">{{this.name}}-{{type}}-{{expiration}}-{{size}}</a>
+      <a href="/beverages/">{{this.name}}-{{type}}-{{size}}</a>
       <div class="action-links">
         {{#if ../isLoggedIn}}
-        <a href="/beverages/edit" class="btn btn-dark">Edit</a>
+        <a href="/beverages/edit" class="btn btn-dark">edit</a>
         {{/if}}
         <button type="submit" class="btn btn-warning delete-button">Delete <span class="hide"></span></button>
       </div>
@@ -15,4 +15,4 @@
   </section>
 </div>
 
-<a  href="/beverage/create"> create </a>
+<a  href="/beverage/list"> Go back to the list </a>
