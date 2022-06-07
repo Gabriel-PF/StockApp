@@ -55,7 +55,7 @@ router.post('/:id/edit', async (req, res, next) => {
   try {
     const { id } = req.params;
     const { name, type, expiration, size, buyingPrice, sellingPrice } = req.body;
-    awabeverage.findByIdAndUpdate(id,
+    await beverage.findByIdAndUpdate(id,
       {
         name,
         type,
@@ -94,5 +94,13 @@ router.get('/:id', async (req, res, next) => {
     next(error);
   }
 })
+
+// Bar 
+
+router.get('/bar', isLoggedIn,(req, res, next) => {
+  res.render('beverage/beverages-bar');
+})
+
+
 
 module.exports = router;
