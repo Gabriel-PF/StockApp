@@ -3,14 +3,18 @@ nksdjkfhsdfh
 {{!--}}
 
 <div class="container">
+<<<<<<< HEAD
   <h1>Beverages in the Bar </h1>
+=======
+  <h1>Bar</h1>
+>>>>>>> 80c8074b6fb1225c631f0cea387484c1fbb956af
   <section id="beverage-container">
     {{#each beverages}}
     <div class="beverage-row">
       <a href="/beverages/">{{this.name}}-{{type}}-{{size}}</a>
       <div class="action-links">
         {{#if ../isLoggedIn}}
-        <a href="/beverages/edit" class="btn btn-dark">Edit</a>
+        <a href="/beverages/edit" class="btn btn-dark">edit</a>
         {{/if}}
         <button type="submit" class="btn btn-warning delete-button">Delete <span class="hide"></span></button>
       </div>
@@ -19,6 +23,10 @@ nksdjkfhsdfh
   </section>
 </div>
 
+<<<<<<< HEAD
 <a  href="/beverage/create"> create </a> 
 
 -}}
+=======
+<a  href="/beverage/list"> Go back to the list </a>
+>>>>>>> 80c8074b6fb1225c631f0cea387484c1fbb956af
