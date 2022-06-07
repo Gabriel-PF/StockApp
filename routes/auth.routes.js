@@ -4,12 +4,34 @@ const User = require("../models/User.model");
 /* const updloader = require('../config/cloudinary.config'); */
 const SALT_FACTOR = 10;
 
+
+
+
+
 router.get("/login", (req, res, next) => {
   res.render("auth/login");
 });
 
 router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
+});
+
+router.get('/logout',  function (req, res, next)  {
+  if (req.session) {
+    // delete session object
+    req.session.destroy(function (err) {
+      if (err) {
+        return next(err);
+      } else {
+        return res.redirect('/');
+      }
+    });
+  }
+});
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/login');
 });
 
 router.post("/signup", async (req, res, next) => {
