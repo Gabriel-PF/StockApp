@@ -1,10 +1,10 @@
 
 <div class="container">
-  <h1>beverages list</h1>
+  <h1>beverages list in the Stock</h1>
   <section id="beverage-container">
     {{#each beverages}}
     <div class="beverage-row">
-      <a href="/beverages/">{{this.name}}-{{type}}-{{expiration}}-{{size}}</a>
+      <a href="/beverage/details">{{this.name}}-{{type}}-{{expiration}}-{{size}}</a>
       <div class="action-links">
 
        {{!--  criar a funcao para esse button  enviar a bebida para o bar --}}
@@ -14,6 +14,7 @@
 
         {{!-- arrumar o link de adit --}}
         <a href="/beverage/edit" class="btn btn-dark">Edit</a>
+    
          <button type="submit" class="btn btn-warning delete-button">Delete <span class="hide"></span></button>
         {{/if}}
 
@@ -24,7 +25,9 @@
   </section>
 </div>
 
-<a  href="/beverage/create"> create </a>
-<a  href="/beverage/bar"> Bar </a>
+<a  href="/beverage/create"> Create new Beverage</a>
+    <br>
+    <br>
+<a  href="/beverage/bar"> Go to the Bar list </a>
 
 {{!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}

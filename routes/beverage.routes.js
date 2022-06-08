@@ -30,6 +30,10 @@ router.get('/list', isLoggedIn, async (req, res, next) => {
   const beverages = await Beverage.find();
   res.render( 'beverage/beverages-list', { beverages,  isAdmin: req.session.currentUser.isAdmin });
 })
+// details
+router.get('/details', isLoggedIn,(req, res, next) => {
+  res.render('beverage/beverages-details');
+})
 
 
 router.post('/create', async (req, res, next) => {
