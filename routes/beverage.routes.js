@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { isAdmin, isLoggedIn } = require('../middlewares/auth.middlewares');
 const Beverage = require('../models/Beverage.model');
 
+
 router.get('/', isLoggedIn, async (req, res, next) => {
   try {
     const Beverages = await beverage.find();
@@ -34,6 +35,17 @@ router.get('/list', isLoggedIn, async (req, res, next) => {
 router.get('/details', isLoggedIn,(req, res, next) => {
   res.render('beverage/beverages-details');
 })
+
+router.post('/beverages/:beverageId/delete', (req, res, next) => {
+  const { beverageId } = req.params;
+
+
+ // delete ?? 
+  Beverage.findByIdAndDelete(beverageId)
+    .then(() => res.redirect('/beverages/list'))
+    .catch(error => next(error));
+});
+
 
 
 router.post('/create', async (req, res, next) => {
@@ -78,16 +90,27 @@ router.get('/:id/edit', async (req, res, next) => {
   }
 })
 
-router.post('/:id/delete', async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    await Beverage.findByIdAndDelete(id);
 
-    res.redirect('/beverages');
+
+
+ router.get('/:id/delete', async (req, res, next) => {
+  try {
+    const { name, type, expiration, size, buyingPrice, sellingPrice } = req.body;
+    await Beverage.findByIdAndDelete({
+      name,
+      type,
+      expiration,
+      size,
+      buyingPrice,
+      sellingPrice
+    });
+
+    res.redirect('/beverage/list');
   } catch (error) {
     next(error);
   }
-})
+}) 
+
 
 router.get('/:id', async (req, res, next) => {
   try {
