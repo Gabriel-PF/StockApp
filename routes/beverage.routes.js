@@ -20,6 +20,10 @@ router.get('/create', isAdmin,(req, res, next) => {
 router.get('/bar', isLoggedIn,(req, res, next) => {
   res.render('beverage/beverages-bar');
 })
+//  Edit
+router.get('/edit', isLoggedIn,(req, res, next) => {
+  res.render('beverage/beverages-edit');
+})
 
 // list
 router.get('/list', isLoggedIn, async (req, res, next) => {
@@ -46,21 +50,12 @@ router.post('/create', async (req, res, next) => {
   }
 })
 
+
 router.get('/:id/edit', async (req, res, next) => {
   try {
     const { id } = req.params;
-    const beverage = await Beverage.findById(id);
-    res.render( 'beverage/Beverages-edit', beverage);
-  } catch (error) {
-    next(error);
-  }
-})
-
-router.post('/:id/edit', async (req, res, next) => {
-  try {
-    const { id } = req.params;
     const { name, type, expiration, size, buyingPrice, sellingPrice } = req.body;
-    await beverage.findByIdAndUpdate(id,
+    await Beverage.findByIdAndUpdate(id,
       {
         name,
         type,
@@ -73,7 +68,7 @@ router.post('/:id/edit', async (req, res, next) => {
         new: true
       });
     
-      res.redirect(`Beverages/${id}`);
+      res.redirect(`/beverage/${id}`);
   } catch (error) {
     next(error);
   }
@@ -84,7 +79,7 @@ router.post('/:id/delete', async (req, res, next) => {
     const { id } = req.params;
     await Beverage.findByIdAndDelete(id);
 
-    res.redirect('/Beverages');
+    res.redirect('/beverages');
   } catch (error) {
     next(error);
   }
@@ -94,17 +89,13 @@ router.get('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const beverage = await Beverage.findById(id);
-    res.render( 'beverages/beverage-details', beverage);
+    res.render( 'beverage/beverages-details', beverage);
   } catch (error) {
     next(error);
   }
 })
 
-// Bar 
 
-router.get('/bar', isLoggedIn,(req, res, next) => {
-  res.render('beverage/beverages-bar');
-})
 
 
 
