@@ -6,6 +6,21 @@
       <form action="/auth/signup" method="POST">
 
         <div class="mb-3">
+          <label for="isAdmin" class="form-label">Name</label>
+          <select required  id="isAdmin" name="isAdmin">
+            <option value="true"> Adm</option>
+            <option value="false"> Runner </option>
+            
+          </select>
+          
+        </div>
+
+        <div class="mb-3">
+          <label for="admId" class="form-label">admId</label>
+          <input type="text" class="form-control" id="admId" name="admId">
+        </div>
+
+        <div class="mb-3">
           <label for="username" class="form-label">Name</label>
           <input required type="text" class="form-control" id="username" name="username">
         </div>

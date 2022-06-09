@@ -14,6 +14,11 @@ const userSchema = new Schema({
       type: Boolean,
       default: false 
     },
+    admId:{
+      type: Schema.Types.ObjectId,
+    ref: "User",
+    default: null
+      }
     
   });
 

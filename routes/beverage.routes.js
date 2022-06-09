@@ -1,36 +1,54 @@
 const router = require('express').Router();
 const { isAdmin, isLoggedIn } = require('../middlewares/auth.middlewares');
+const { findById } = require('../models/Beverage.model');
 const Beverage = require('../models/Beverage.model');
 
 
 router.get('/', isLoggedIn, async (req, res, next) => {
   try {
-    const Beverages = await beverage.find();
+    const beverages = await Beverage.find({bar:false});
     res.render( 'beverage/beverages-list', { Beverages, isAdmin: req.session.currentUser.isAdmin });
   } catch (error) {
     next(error);
   }
 })
 
+
 //  create
 router.get('/create', isAdmin,(req, res, next) => {
   res.render('beverage/beverages-create');
 })
 
-//  Bar
-router.get('/bar', isLoggedIn,(req, res, next) => {
-  res.render('beverage/beverages-bar');
+
+// Send to bar
+router.post('/send-to-bar/:id', isLoggedIn, async(req, res, next) => {
+  const {id}= req.params;
+  const beverages = await Beverage.findByIdAndUpdate (id, {bar:true}, {new:true})
+
+  const newBeverages = await Beverage.find({user: req.session.currentUser._id, bar: false });
+  res.render('beverage/beverages-list',{ newBeverages,  isAdmin: req.session.currentUser.isAdmin });
+
+
 })
+
 //  Edit
 router.get('/edit', isAdmin,(req, res, next) => {
-  res.render('beverage/beverages-edit');
+  res.render('beverage/beverages-edit',);
 })
 
 // list
 router.get('/list', isLoggedIn, async (req, res, next) => {
-  const beverages = await Beverage.find();
+  const beverages = await Beverage.find({user: req.session.currentUser.isAdmin ? req.session.currentUser._id : req.session.currentUser.admId , bar: true});
   res.render( 'beverage/beverages-list', { beverages,  isAdmin: req.session.currentUser.isAdmin });
 })
+
+//bar
+router.get('/bar', isLoggedIn, async (req, res, next) => {
+  const beverages = await Beverage.find({user: req.session.currentUser.isAdmin ? req.session.currentUser._id : req.session.currentUser.admId , bar: true });
+  res.render( 'beverage/beverages-bar', { beverages,  isAdmin: req.session.currentUser.isAdmin });
+})
+
+
 // details
 router.get('/details', isLoggedIn,(req, res, next) => {
   res.render('beverage/beverages-details',);
@@ -50,14 +68,16 @@ router.post('/beverages/:beverageId/delete',isAdmin, (req, res, next) => {
 
 router.post('/create', async (req, res, next) => {
   try {
-    const { name, type, expiration, size, buyingPrice, sellingPrice } = req.body;
+    const { name, type, expiration, size, buyingPrice, sellingPrice, quantity } = req.body;
     await Beverage.create({
+      user: req.session.currentUser._id,
       name,
       type,
       expiration,
       size,
       buyingPrice,
-      sellingPrice
+      sellingPrice,
+      quantity
     });
 
     res.redirect('/beverage/list');
@@ -121,9 +141,6 @@ router.get('/:id', async (req, res, next) => {
     next(error);
   }
 })
-
-
-
 
 
 module.exports = router;
