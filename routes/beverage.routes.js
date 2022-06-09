@@ -41,11 +41,10 @@ router.post('/beverages/:beverageId/delete', (req, res, next) => {
 
 
  // delete ?? 
-  Beverage.findByIdAndDelete(beverageId)
+   Beverage.findByIdAndDelete(beverageId)
     .then(() => res.redirect('/beverages/list'))
     .catch(error => next(error));
-});
-
+}); 
 
 
 router.post('/create', async (req, res, next) => {
