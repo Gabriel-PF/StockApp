@@ -2,6 +2,7 @@
   <h1>Beverages in the Bar </h1>
   <section id="beverage-container">
     {{#each beverages}}
+
     <div class="beverage-row">
       <a href="/beverages/">{{this.name}}-{{type}}-{{size}}</a>
      {{!--  <div class="action-links">
@@ -11,7 +12,9 @@
         <button type="submit" class="btn btn-warning delete-button">Delete <span class="hide"></span></button>
       </div> --}}
     </div>
+    
     {{/each}}
+
   </section>
 </div>
 

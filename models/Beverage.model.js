@@ -1,6 +1,12 @@
 const { Schema, model } = require('mongoose');
 
 const beverageSchema = new Schema({
+  user:{
+    type: Schema.Types.ObjectId,
+    ref: "User"
+  
+    },
+
   name: {
     type: String,
     /* required: true */
@@ -30,6 +36,15 @@ const beverageSchema = new Schema({
     type: Number,
     min: 0,
     max: 2000
+  },
+  quantity : {
+    type: Number,
+    
+  },
+
+  bar:{
+  type: Boolean,
+  default: false
   }
 
 });
