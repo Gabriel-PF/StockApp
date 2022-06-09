@@ -109,7 +109,7 @@ router.post("/login", async (req, res, next) => {
       delete objectUser.password;
       req.session.currentUser = objectUser;
 
-      return res.redirect("/");
+      return res.redirect("/beverage/list");
     }
   } catch (error) {}
 });

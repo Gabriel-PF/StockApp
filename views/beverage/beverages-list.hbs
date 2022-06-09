@@ -15,7 +15,9 @@
         {{!-- arrumar o link de adit --}}
         <a href="/beverage/edit" class="btn btn-dark">Edit</a>
     
-         <button type="submit" class="btn btn-warning delete-button">Delete <span class="hide"></span></button>
+        <form action="/beverage/{{_id}}/delete" method="POST">
+           <button>Delete</button>
+        </form>
         {{/if}}
 
        

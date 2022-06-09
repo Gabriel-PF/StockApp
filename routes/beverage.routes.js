@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { isAdmin, isLoggedIn } = require('../middlewares/auth.middlewares');
 const Beverage = require('../models/Beverage.model');
 
+
 router.get('/', isLoggedIn, async (req, res, next) => {
   try {
     const Beverages = await beverage.find();
@@ -21,7 +22,7 @@ router.get('/bar', isLoggedIn,(req, res, next) => {
   res.render('beverage/beverages-bar');
 })
 //  Edit
-router.get('/edit', isLoggedIn,(req, res, next) => {
+router.get('/edit', isAdmin,(req, res, next) => {
   res.render('beverage/beverages-edit');
 })
 
@@ -32,8 +33,19 @@ router.get('/list', isLoggedIn, async (req, res, next) => {
 })
 // details
 router.get('/details', isLoggedIn,(req, res, next) => {
-  res.render('beverage/beverages-details');
+  res.render('beverage/beverages-details',);
 })
+
+
+ // delete ?? 
+router.post('/beverages/:beverageId/delete',isAdmin, (req, res, next) => {
+  const { beverageId } = req.params;
+
+
+   Beverage.findByIdAndDelete(beverageId)
+    .then(() => res.redirect('beverages/list'))
+    .catch(error => next(error));
+}); 
 
 
 router.post('/create', async (req, res, next) => {
@@ -55,7 +67,7 @@ router.post('/create', async (req, res, next) => {
 })
 
 
-router.get('/:id/edit', async (req, res, next) => {
+router.get('/edit', async (req, res, next) => {
   try {
     const { id } = req.params;
     const { name, type, expiration, size, buyingPrice, sellingPrice } = req.body;
@@ -72,23 +84,34 @@ router.get('/:id/edit', async (req, res, next) => {
         new: true
       });
     
-      res.redirect(`/beverage/${id}`);
+      res.redirect(`/beverage/list`);
   } catch (error) {
     next(error);
   }
 })
 
-router.post('/:id/delete', async (req, res, next) => {
+
+
+
+ router.get('/:id/delete', async (req, res, next) => {
   try {
-    const { id } = req.params;
-    await Beverage.findByIdAndDelete(id);
+    const { name, type, expiration, size, buyingPrice, sellingPrice } = req.body;
+    await Beverage.findByIdAndDelete({
+      name,
+      type,
+      expiration,
+      size,
+      buyingPrice,
+      sellingPrice
+    });
 
-    res.redirect('/beverages');
+    res.redirect('/beverage/list');
   } catch (error) {
     next(error);
   }
-})
+}) 
 
+// details
 router.get('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
