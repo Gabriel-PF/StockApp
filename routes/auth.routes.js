@@ -39,7 +39,7 @@ router.post("/signup", async (req, res, next) => {
 
   if (!username || !password) {
     return res.render("auth/signup", {
-      errorMessage: "Credentials are mondatory",
+      errorMessage: "Credentials are mandatory",
     });
   }
 
