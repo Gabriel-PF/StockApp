@@ -4,14 +4,11 @@
     {{#each beverages}}
 
     <div class="beverage-row">
-      <a href="/beverages/">{{this.name}}-{{type}}-{{size}}</a>
-       <form action="/beverage/sold/{{this._id}}" method="POST"><button type="submit" class="btn btn-warning delete-button">Sold beverages <span class="hide"></span></button></form>
-     {{!--  <div class="action-links">
-        {{#if ../isLoggedIn}}
-        <a href="/beverages/edit" class="btn btn-dark">edit</a>
-        {{/if}}
-        <button type="submit" class="btn btn-warning delete-button">Delete <span class="hide"></span></button>
-      </div> --}}
+      <a href="/beverages/details">{{this.name}}-{{type}}-{{size}}-{{quantity}}</a>
+      <div class="action-links">
+       <form action="/beverage/send-to-sold/{{this._id}}" method="POST"><button type="submit" class="btn btn-warning delete-button">Sold<span class="hide"></span></button></form>
+    
+    </div>
     </div>
     
     {{/each}}
