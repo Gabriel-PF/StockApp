@@ -22,11 +22,11 @@ router.get('/create', isAdmin,(req, res, next) => {
 
 // Send to bar
 router.post('/send-to-bar/:id', isLoggedIn, async(req, res, next) => {
-  const {id}= req.params;
+  const {id} = req.params;
   const beverages = await Beverage.findByIdAndUpdate (id, {bar:true}, {new:true})
 
   const newBeverages = await Beverage.find({user: req.session.currentUser._id, bar: false });
-  res.render('beverage/beverages-list',{ newBeverages,  isAdmin: req.session.currentUser.isAdmin });
+  res.render('beverage/beverages-list',{ newBeverages,  isAdmin: req.session.currentUser.sAdmini });
 
 
 })
@@ -38,13 +38,13 @@ router.get('/edit', isAdmin,(req, res, next) => {
 
 // list
 router.get('/list', isLoggedIn, async (req, res, next) => {
-  const beverages = await Beverage.find({user: req.session.currentUser.isAdmin ? req.session.currentUser._id : req.session.currentUser.admId , bar: true});
+  const beverages = await Beverage.find({user: req.session.currentUser.isAdmin ? req.session.currentUser._id : req.session.currentUser.admId , bar: false, list:true });
   res.render( 'beverage/beverages-list', { beverages,  isAdmin: req.session.currentUser.isAdmin });
 })
 
 //bar
 router.get('/bar', isLoggedIn, async (req, res, next) => {
-  const beverages = await Beverage.find({user: req.session.currentUser.isAdmin ? req.session.currentUser._id : req.session.currentUser.admId , bar: true });
+  const beverages = await Beverage.find({user: req.session.currentUser.isAdmin ? req.session.currentUser._id : req.session.currentUser.admId , bar: true , list: false });
   res.render( 'beverage/beverages-bar', { beverages,  isAdmin: req.session.currentUser.isAdmin });
 })
 
