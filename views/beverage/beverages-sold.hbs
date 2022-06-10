@@ -1,11 +1,10 @@
  <div class="container">
-  <h1>Beverages in the Bar </h1>
+  <h1>Beverages sold in the Bar </h1>
   <section id="beverage-container">
     {{#each beverages}}
 
     <div class="beverage-row">
-      <a href="/beverages/">{{this.name}}-{{type}}-{{size}}</a>
-       <form action="/beverage/sold/{{this._id}}" method="POST"><button type="submit" class="btn btn-warning delete-button">Sold beverages <span class="hide"></span></button></form>
+      <a href="/beverages/">{{this.name}}-{{type}}-{{size}}-{{quantity}}</a>
      {{!--  <div class="action-links">
         {{#if ../isLoggedIn}}
         <a href="/beverages/edit" class="btn btn-dark">edit</a>
@@ -19,6 +18,4 @@
   </section>
 </div>
 
-<a  href="/beverage/list"> Go back to the Stock </a> 
-
-
+<a  href="/beverage/bar"> Go back to the Bar </a> 

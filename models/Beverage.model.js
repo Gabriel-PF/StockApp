@@ -46,6 +46,10 @@ const beverageSchema = new Schema({
   bar:{
   type: Boolean,
   default: false
+  },
+  sold:{
+    type: Boolean,
+    default: false
   }
 
 });

@@ -19,6 +19,11 @@ router.get('/create', isAdmin,(req, res, next) => {
   res.render('beverage/beverages-create');
 })
 
+//Sold
+router.get('/sold', isLoggedIn,(req, res, next) => {
+  res.render('beverage/beverages-sold');
+})
+
 
 // Send to bar
 router.post('/send-to-bar/:id', isLoggedIn, async(req, res, next) => {
@@ -26,10 +31,20 @@ router.post('/send-to-bar/:id', isLoggedIn, async(req, res, next) => {
   const beverages = await Beverage.findByIdAndUpdate (id, {bar:true}, {new:true})
 
   const newBeverages = await Beverage.find({user: req.session.currentUser._id, bar: false });
-  res.render('beverage/beverages-list',{ newBeverages,  isAdmin: req.session.currentUser.sAdmini });
-
+  res.render('beverage/beverages-list',{ newBeverages,  isAdmin: req.session.currentUser.isAdmin });
 
 })
+
+//Sold beverages
+
+router.post('/sold', isLoggedIn, async (req, res, next) => {
+  const {id} = req.params;
+  const beverages = await Beverage.findByIdAndUpdate (id, {sold:true}, {new:true})
+
+  const newBeverages = await Beverage.find({user: req.session.currentUser._id, sold: false });
+  res.render('beverage/beverages-bar',{ newBeverages, isLoggedIn: req.session.currentUser.isLoggedIn });
+})
+
 
 //  Edit
 router.get('/edit', isAdmin,(req, res, next) => {
@@ -110,26 +125,6 @@ router.get('/edit', async (req, res, next) => {
   }
 })
 
-
-
-
- router.get('/:id/delete', async (req, res, next) => {
-  try {
-    const { name, type, expiration, size, buyingPrice, sellingPrice } = req.body;
-    await Beverage.findByIdAndDelete({
-      name,
-      type,
-      expiration,
-      size,
-      buyingPrice,
-      sellingPrice
-    });
-
-    res.redirect('/beverage/list');
-  } catch (error) {
-    next(error);
-  }
-}) 
 
 // details
 router.get('/:id', async (req, res, next) => {
