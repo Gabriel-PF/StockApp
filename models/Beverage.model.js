@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const beverageSchema = new Schema({
+  
   user:{
     type: Schema.Types.ObjectId,
     ref: "User"
