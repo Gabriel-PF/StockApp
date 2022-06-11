@@ -20,11 +20,7 @@ connection();
 
 async function connection() {
     try {
-        await mongoose.connect(process.env.MONGODB_URI, {
-            userNewUrlParser: true,
-            userCreateIndex: true,
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect(process.env.MONGODB_URI);
 
         await User.deleteMany({ role: 'ADMIN'});
 
