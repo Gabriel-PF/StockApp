@@ -1,4 +1,5 @@
 require('dotenv/config');
+require('../db/index')
 const mongoose = require('mongoose'); 
 const User = require('../models/User.model');
 const bcrypt = require('bcryptjs'); 

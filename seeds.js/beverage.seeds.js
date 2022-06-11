@@ -1,3 +1,4 @@
+require('dotenv/config')
 require('../db');
 const beverages = require('../data/beverages');
 const beverage = require('../model/Beverage.model');
