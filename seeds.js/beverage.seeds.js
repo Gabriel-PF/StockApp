@@ -1,6 +1,6 @@
 require('../db');
 const beverages = require('../data/beverages');
-const beverage = require('../model/beverage.model');
+const beverage = require('../model/Beverage.model');
 
 const createBeverages = async () => {
   try {
