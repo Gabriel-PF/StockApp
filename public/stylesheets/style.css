@@ -1,7 +1,7 @@
 body {
 	padding: 20px;
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-/* 	background-color: rgb(31, 30, 30); */
+ 	background-color: rgb(194, 188, 188);
 }
   a {
 	color: #00b7ff;
@@ -34,8 +34,9 @@ body {
 	display: none;
   }
 
-  .button {
-	background-color: #4CAF50; /* Green */
+  .button1 {
+	
+	background-color: #304730; 
 	border: none;
 	color: white;
 	padding: 15px 32px;
@@ -46,8 +47,67 @@ body {
 	margin: 4px 2px;
 	cursor: pointer;
   }
+  .button {
+	display: flex;
+	justify-content: center;
+	background-color: #292a29; 
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+  }
+  .button3 {
+	display: flex;
+	justify-content: center;
+	background-color: #292a29; 
+	border: none;
+	color: rgb(199, 201, 198);
+	padding: 7px 15px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+  }
 
+  .buttonEdit {
+	display: flex;
+	justify-content: center;
+	background-color: #696d45; 
+	border: none;
+	color: rgb(199, 201, 198);
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+  }
+
+  .buttonSold{
+	display: flex;
+	justify-content: center;
+	background-color: #374e37; 
+	border: none;
+	color: rgb(199, 201, 198);
+	padding: 7px 15px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+
+  }
 .button5 {
+	
   background-color: rgb(202, 199, 199);
   color: black;
   border: 2px solid #555555;

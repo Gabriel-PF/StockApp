@@ -1,10 +1,12 @@
  <div class="container">
-  <h1>SOLD </h1>
+  <h1>Sold Beverages </h1>
+  <br>
+  <br>
   <section id="beverage-container">
     {{#each beverages}}
 
-    <div class="beverage-row">
-      <a href="/beverages/details">{{this.name}}-{{quantity}}-{{sellingPrice}}</a>
+    <div class="button1" >
+      <a class="button3" href="/beverages/details">{{this.name}}-{{quantity}}-{{sellingPrice}}</a>
      
     </div>
     
@@ -12,5 +14,7 @@
 
   </section>
 </div>
+<br>
+  <br>
 
-<a  href="/beverage/bar"> Go back to the Bar </a> 
+<a class="button" href="/beverage/bar"> Bar </a> 

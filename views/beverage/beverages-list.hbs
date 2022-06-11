@@ -1,19 +1,22 @@
 
 <div class="container">
-  <h1>beverages list in the Stock</h1>
+  <h1>Beverages in the Stock</h1>
+  <br>
+  <br>
+
   <section id="beverage-container">
     {{#each beverages}}
-    <div class="beverage-row">
-      <a href="/beverage/details">{{this.name}}-{{type}}-{{expiration}}-{{size}}-{{quantity}}</a>
+    <div class="button">
+      <a class="button" href="/beverage/details">{{this.name}}-{{type}}-{{expiration}}-{{size}}-{{quantity}}</a>
       <div class="action-links">
 
        {{!--  criar a funcao para esse button  enviar a bebida para o bar --}}
-         <form action="/beverage/send-to-bar/{{this._id}}" method="POST"><button type="submit" class="btn btn-warning delete-button">Send to the Bar <span class="hide"></span></button></form>
+         <form  action="/beverage/send-to-bar/{{this._id}}" method="POST"><button type="submit" class="button1">Send to the Bar <span class="hide"></span></button></form>
 
         {{#if ../isAdmin}}
 
         {{!-- arrumar o link de adit --}}
-        <a href="/beverage/edit" class="btn btn-dark">Edit</a>
+        <a class= "buttonEdit"  href="/beverage/edit" class="btn btn-dark">Edit</a>
     
         {{/if}}
 
@@ -23,10 +26,17 @@
     {{/each}}
   </section>
 </div>
+<br>
+<br>
+  <br>
+<a class="button1" href="/beverage/create"> Create new Beverage</a>
+    <br>
 
-<a  href="/beverage/create"> Create new Beverage</a>
     <br>
+<a class="button" href="/beverage/bar"> Bar </a>
     <br>
-<a  href="/beverage/bar"> Go to the Bar list </a>
+
+    <br>
+
 
 {{!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}

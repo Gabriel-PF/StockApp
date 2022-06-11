@@ -1,12 +1,14 @@
  <div class="container">
   <h1>Beverages in the Bar </h1>
+  <br>
+  <br>
   <section id="beverage-container">
     {{#each beverages}}
 
-    <div class="beverage-row">
-      <a href="/beverages/details">{{this.name}}-{{type}}-{{size}}-{{quantity}}</a>
+    <div class="button">
+      <a class="button3" href="/beverages/details">{{this.name}}-{{type}}-{{size}}-{{quantity}}</a>
       <div class="action-links">
-       <form action="/beverage/send-to-sold/{{this._id}}" method="POST"><button type="submit" class="btn btn-warning delete-button">Sold<span class="hide"></span></button></form>
+       <form action="/beverage/send-to-sold/{{this._id}}" method="POST"><button type="submit" class="button1">Sold<span class="hide"></span></button></form>
     
     </div>
     </div>
@@ -15,7 +17,11 @@
 
   </section>
 </div>
+<br>
+  <br>
 
-<a  href="/beverage/list"> Go back to the Stock </a> 
+<a class="button" href="/beverage/list"> Stock </a> 
+<br>
+<a class="button1" href="/beverage/sold">Sold Beverages </a> 
 
 
