@@ -1,5 +1,4 @@
 require('dotenv/config');
-require('../db/index')
 const mongoose = require('mongoose'); 
 const User = require('../models/User.model');
 const bcrypt = require('bcryptjs'); 
@@ -21,7 +20,7 @@ connection();
 
 async function connection() {
     try {
-        await mongoose.connect(process.env.MONGO_URI, {
+        await mongoose.connect(process.env.MONGODB_URI, {
             userNewUrlParser: true,
             userCreateIndex: true,
             useUnifiedTopology: true,
