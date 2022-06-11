@@ -1,7 +1,7 @@
 require('dotenv/config')
 require('../db');
 const beverages = require('../data/beverages');
-const beverage = require('../model/Beverage.model');
+const beverage = require('../models/Beverage.model');
 
 const createBeverages = async () => {
   try {
