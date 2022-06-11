@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const User = require('../models/User.model');
 const bcrypt = require('bcryptjs'); 
 
-const password = 'admin'; 
+const password = 'Adm1nAdm1n'; 
 const securePass = bcrypt.hashSync(password);
 const boss = 'admin'
 

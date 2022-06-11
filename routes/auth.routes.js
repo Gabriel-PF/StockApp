@@ -57,7 +57,7 @@ router.post("/signup", async (req, res, next) => {
         admId
         
       });
-      res.redirect("auth/login");
+      res.redirect("/auth/login");
     }
   } catch (error) {
     next(error);
